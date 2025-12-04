@@ -1,0 +1,110 @@
+import { useEffect, useState } from "react";
+import { fetchCandidates, castVote } from "../api/apiClient";
+
+export default function VotePage({ token, onGoToResults, onBackToWelcome }) {
+    const [candidates, setCandidates] = useState([]);
+    const [selectedCandidate, setSelectedCandidate] = useState(""); // no default
+    const [message, setMessage] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        async function loadCandidates() {
+            try {
+                const list = await fetchCandidates();
+                setCandidates(list);
+                // IMPORTANT: do NOT setSelectedCandidate(list[0]) here
+            } catch (err) {
+                console.error(err);
+                setMessage("Failed to load candidates.");
+            }
+        }
+
+        loadCandidates();
+    }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setMessage("");
+        setIsSubmitting(true);
+
+        try {
+            const result = await castVote(token, selectedCandidate);
+            setMessage(result.message || "");
+        } catch (err) {
+            console.error(err);
+            setMessage("Something went wrong while casting your vote.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    return (
+        <div className="page">
+            <h1>Official Ballot</h1>
+            <p>
+                Voting token: <strong>{token}</strong>
+            </p>
+
+            <form onSubmit={handleSubmit}>
+                <div className="ballot">
+                    <div className="ballot-header">
+                        <span className="ballot-header-text">Select a candidate</span>
+                        <span className="ballot-header-choice">Your choice</span>
+                    </div>
+
+                    <div className="ballot-body">
+                        {candidates.map((c) => (
+                            <label
+                                key={c}
+                                className={
+                                    "ballot-row" +
+                                    (selectedCandidate === c ? " ballot-row-selected" : "")
+                                }
+                            >
+                                <div className="ballot-candidate">
+                                    <div className="ballot-candidate-name">{c}</div>
+                                    <div className="ballot-candidate-party">Party</div>
+                                    <div className="ballot-candidate-desc">
+                                        This is a brief description of the candidate and their
+                                        platform. (Placeholder text for the mock ballot.)
+                                    </div>
+                                </div>
+                                <div className="ballot-choice">
+                                    <input
+                                        type="radio"
+                                        name="candidate"
+                                        value={c}
+                                        checked={selectedCandidate === c}
+                                        onChange={() => setSelectedCandidate(c)}
+                                    />
+                                </div>
+                            </label>
+                        ))}
+
+                        {candidates.length === 0 && (
+                            <div className="ballot-empty">No candidates available.</div>
+                        )}
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    disabled={isSubmitting || !selectedCandidate} // stays greyed out until one is picked
+                >
+                    {isSubmitting ? "Submitting ballot..." : "Submit Vote"}
+                </button>
+            </form>
+
+            {message && <p className="vote-message">{message}</p>}
+
+            <hr />
+
+            <button type="button" onClick={onGoToResults}>
+                View results
+            </button>
+            <button type="button" onClick={onBackToWelcome}>
+                Back to welcome
+            </button>
+        </div>
+    );
+}
