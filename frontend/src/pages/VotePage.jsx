@@ -89,10 +89,6 @@ export default function VotePage({ token, onBackToWelcome, apiUrl }) {
                                 <div className="ballot-candidate">
                                     <div className="ballot-candidate-name">{c}</div>
                                     <div className="ballot-candidate-party">Party</div>
-                                    <div className="ballot-candidate-desc">
-                                        This is a brief description of the candidate and their
-                                        platform. (Placeholder text for the mock ballot.)
-                                    </div>
                                 </div>
                                 <div className="ballot-choice">
                                     <input

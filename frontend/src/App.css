@@ -240,19 +240,15 @@ hr {
 }
 
 .ballot-candidate-name {
+  font-size: large;
   font-weight: 600;
   margin-bottom: 0.15rem;
 }
 
 .ballot-candidate-party {
-  font-size: 0.85rem;
+  font-size: medium;
   font-weight: 600;
   margin-bottom: 0.25rem;
-  color: #4b5563;
-}
-
-.ballot-candidate-desc {
-  font-size: 0.85rem;
   color: #4b5563;
 }
 
