@@ -1,18 +1,28 @@
 import { useEffect, useState } from "react";
-import { fetchCandidates, castVote } from "../api/apiClient";
 
-export default function VotePage({ token, onGoToResults, onBackToWelcome }) {
+export default function VotePage({ token, onBackToWelcome, apiUrl }) {
+
+    console.log("VotePage received token:", token);
+    
     const [candidates, setCandidates] = useState([]);
     const [selectedCandidate, setSelectedCandidate] = useState(""); // no default
     const [message, setMessage] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
+
         async function loadCandidates() {
+
             try {
-                const list = await fetchCandidates();
-                setCandidates(list);
-                // IMPORTANT: do NOT setSelectedCandidate(list[0]) here
+
+                const response = await fetch(apiUrl + "/candidates", {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                const list = await response.json();
+                setCandidates(list.candidates);
+
             } catch (err) {
                 console.error(err);
                 setMessage("Failed to load candidates.");
@@ -28,11 +38,26 @@ export default function VotePage({ token, onGoToResults, onBackToWelcome }) {
         setIsSubmitting(true);
 
         try {
-            const result = await castVote(token, selectedCandidate);
-            setMessage(result.message || "");
+
+            const payload = { token: token, selected_candidate: selectedCandidate };
+            console.log("Sending payload:", payload); // Add this line
+
+            const result = await fetch(apiUrl + "/vote", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token: token, selected_candidate: selectedCandidate }),
+            });
+
+            console.log("Response status:", result.status); // Add this line
+        const resultData = await result.json();
+        console.log("Response data:", resultData); // Add this line
+
+            setMessage(resultData.message || "");
+
         } catch (err) {
             console.error(err);
             setMessage("Something went wrong while casting your vote.");
+            
         } finally {
             setIsSubmitting(false);
         }
@@ -99,11 +124,8 @@ export default function VotePage({ token, onGoToResults, onBackToWelcome }) {
 
             <hr />
 
-            <button type="button" onClick={onGoToResults}>
-                View results
-            </button>
             <button type="button" onClick={onBackToWelcome}>
-                Back to welcome
+                Back to Home
             </button>
         </div>
     );

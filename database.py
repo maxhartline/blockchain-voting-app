@@ -53,7 +53,7 @@ def generate_unique_token():
     while True:
         # Generate 3 random uppercase letters and 3 random numbers
         letters = ''.join(random.choices(string.ascii_uppercase, k=3))
-        numbers = ''.join(random.choices(string.numbers, k=3))
+        numbers = ''.join(random.choices(string.digits, k=3))
         token = letters + numbers
         
         # Check if token already exists in database
