@@ -23,7 +23,7 @@ export default function RegisterPage({ onBackToWelcome, apiUrl }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: firstName.trim() + " " + lastName.trim(),
-          dob: dob.trim(),
+          date_of_birth: dob.trim(),
           address: address.trim(),
         }),
       });
