@@ -24,7 +24,7 @@ def register_endpoint():
         # Get registration data from request
         data = request.json
         name = data.get("name")
-        dob = data.get("dob")
+        dob = data.get("date_of_birth")
         address = data.get("address")
         
         # Validate that all fields are provided
@@ -59,7 +59,6 @@ def register_endpoint():
             "success": False,
             "message": f"Registration failed: {str(e)}"
         }), 500
-
 
 # Validate token endpoint
 @app.route("/validate-token", methods=["POST"])
@@ -135,6 +134,34 @@ def candidates_endpoint():
         return jsonify({
             "success": False,
             "message": f"Failed to fetch candidates: {str(e)}"
+        }), 500
+
+# Blockchain endpoint
+@app.route("/blockchain", methods=["GET"])
+def view_blockchain():
+    try:
+        from main import blockchain
+        
+        chain_data = []
+        for i, block in enumerate(blockchain):
+            chain_data.append({
+                'block_index': i,
+                'previous_hash': block.previous_hash,
+                'timestamp': block.timestamp,
+                'transactions': block.transaction,
+                'block_hash': block.block_hash
+            })
+        
+        return jsonify({
+            'success': True,
+            'blockchain': chain_data,
+            'length': len(blockchain)
+        }), 200
+        
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': f'Failed to fetch blockchain: {str(e)}'
         }), 500
 
 if __name__ == "__main__":
