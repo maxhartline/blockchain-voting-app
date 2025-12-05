@@ -1,8 +1,8 @@
 import { useState } from "react";
+
 import WelcomePage from "./pages/WelcomePage";
 import RegisterPage from "./pages/RegisterPage";
 import VotePage from "./pages/VotePage";
-import ResultsPage from "./pages/ResultsPage";
 import "./App.css";
 
 function App() {
@@ -12,35 +12,36 @@ function App() {
   const goToWelcome = () => setCurrentPage("welcome");
   const goToRegister = () => setCurrentPage("register");
   const goToVote = () => setCurrentPage("vote");
-  const goToResults = () => setCurrentPage("results");
+
+  const API_URL = "http://127.0.0.1:5000";
 
   return (
     <div className="app">
       {currentPage === "welcome" && (
         <WelcomePage
+          token={token}
+          setToken={setToken}
           onTokenValidated={(validatedToken) => {
             setToken(validatedToken);
             goToVote();
           }}
           onGoToRegister={goToRegister}
+          apiUrl={API_URL}
         />
       )}
 
       {currentPage === "register" && (
-        <RegisterPage onBackToWelcome={goToWelcome} />
+        <RegisterPage onBackToWelcome={goToWelcome} apiUrl={API_URL}/>
       )}
 
       {currentPage === "vote" && (
         <VotePage
           token={token}
-          onGoToResults={goToResults}
           onBackToWelcome={goToWelcome}
+          apiUrl={API_URL}
         />
       )}
 
-      {currentPage === "results" && (
-        <ResultsPage onBackToWelcome={goToWelcome} />
-      )}
     </div>
   );
 }

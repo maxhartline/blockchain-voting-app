@@ -24,7 +24,7 @@ def register_endpoint():
         # Get registration data from request
         data = request.json
         name = data.get("name")
-        dob = data.get("date_of_birth")
+        dob = data.get("dob")
         address = data.get("address")
         
         # Validate that all fields are provided
