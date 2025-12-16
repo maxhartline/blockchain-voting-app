@@ -253,13 +253,13 @@ npm run preview
 
 ## Key Features
 
-✅ **Blockchain Security**: Tamper-proof voting records using SHA-256 hashing  
-✅ **Token-Based Authentication**: One-time use tokens prevent double voting  
-✅ **Duplicate Prevention**: Database checks prevent same person registering twice  
-✅ **Chain Validation**: Automatic verification of blockchain integrity after each vote  
-✅ **CORS Enabled**: Cross-origin requests supported for frontend/backend separation  
-✅ **Responsive UI**: Clean, user-friendly voting interface  
-✅ **Immutable Audit Trail**: All votes permanently recorded on blockchain  
+**Blockchain Security**: Tamper-proof voting records using SHA-256 hashing  
+**Token-Based Authentication**: One-time use tokens prevent double voting  
+**Duplicate Prevention**: Database checks prevent same person registering twice  
+**Chain Validation**: Automatic verification of blockchain integrity after each vote  
+**CORS Enabled**: Cross-origin requests supported for frontend/backend separation  
+**Responsive UI**: Clean, user-friendly voting interface  
+**Immutable Audit Trail**: All votes permanently recorded on blockchain  
 
 ## Project Structure
 
