@@ -13,7 +13,7 @@ create_genesis_block()
 database.create_db()
 
 # Add candidates to database
-candidates = ["Doug Ford", "Dwayne 'The Rock' Johnson", "Zohran Mamdani", "Bernie Sanders", "Tim Houston"]
+candidates = ["Keanu Reeves", "Dwayne 'The Rock' Johnson", "Dolly Parton", "Pedro Pascal", "Meryl Streep"]
 for c in candidates:
     database.add_candidate(c)
 
