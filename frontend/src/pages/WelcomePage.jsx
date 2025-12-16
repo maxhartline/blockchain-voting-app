@@ -135,46 +135,46 @@ export default function WelcomePage({
         </div>
       </div>
 
-      {/* Features Footer */}
-      <div className="border-t border-border bg-muted/30">
-        <div className="max-w-4xl mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="flex items-start gap-3 text-center md:text-left">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mx-auto md:mx-0">
-                <Shield className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground text-sm">Secure & Private</h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Your vote is encrypted and anonymous
-                </p>
-              </div>
+        {/* Features Footer */}
+        <div className="border-t border-border bg-muted/30">
+            <div className="max-w-4xl mx-auto px-4 py-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="flex flex-col md:flex-row items-center md:items-start gap-3 text-center md:text-left">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        <Shield className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                        <h3 className="font-semibold text-foreground text-sm">Secure & Private</h3>
+                        <p className="text-xs text-muted-foreground mt-1">
+                            Your vote is encrypted and anonymous
+                        </p>
+                        </div>
+                    </div>
+                    <div className="flex flex-col md:flex-row items-center md:items-start gap-3 text-center md:text-left">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        <Lock className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                        <h3 className="font-semibold text-foreground text-sm">Blockchain Verified</h3>
+                        <p className="text-xs text-muted-foreground mt-1">
+                            Immutable record of all votes
+                        </p>
+                        </div>
+                    </div>
+                    <div className="flex flex-col md:flex-row items-center md:items-start gap-3 text-center md:text-left">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        <Vote className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                        <h3 className="font-semibold text-foreground text-sm">One Vote Per Token</h3>
+                        <p className="text-xs text-muted-foreground mt-1">
+                            Ensures fair and accurate results
+                        </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="flex items-start gap-3 text-center md:text-left">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mx-auto md:mx-0">
-                <Lock className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground text-sm">Blockchain Verified</h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Immutable record of all votes
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 text-center md:text-left">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mx-auto md:mx-0">
-                <Vote className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground text-sm">One Vote Per Token</h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Ensures fair and accurate results
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
   );
 }
