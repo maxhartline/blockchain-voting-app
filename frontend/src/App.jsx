@@ -3,7 +3,6 @@ import { useState } from "react";
 import WelcomePage from "./pages/WelcomePage";
 import RegisterPage from "./pages/RegisterPage";
 import VotePage from "./pages/VotePage";
-import "./App.css";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("welcome");
@@ -41,7 +40,6 @@ function App() {
           apiUrl={API_URL}
         />
       )}
-
     </div>
   );
 }

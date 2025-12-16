@@ -22,7 +22,7 @@ def add_block(transactions):
     new_block = Block(last_hash, transactions)
     blockchain.append(new_block)
 
-# Function to validate the integrity of the blockchain
+# Function to validate the integrity of the blockchain0
 def validate_blockchain(chain):
     for i in range(1, len(chain)):
         # Check if the previous hash of the current block matches the hash of the previous block
